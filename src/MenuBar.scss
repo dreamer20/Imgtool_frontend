@@ -1,0 +1,30 @@
+.MenuBar {
+  display: flex;
+  flex-flow: row nowrap;
+  list-style: none;
+  padding: 0;
+  background: #1c1c1c;
+  margin: 0;
+
+  &__item {
+    list-style: none;
+    position: relative;
+    cursor: default;
+    color: #ddd;
+    padding: 5px;
+
+    &:hover {
+      background: #333;
+    }
+  }
+
+  &__menu {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background: #1c1c1c;
+    left: 0;
+    top: 100%;
+    min-width: 150px;
+  }
+}
