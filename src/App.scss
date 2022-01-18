@@ -1,3 +1,18 @@
-.header {
-  background: #333;
+.App {
+  margin-bottom: 60px;
+
+  &__header {
+    background: #1c1c1c;
+    padding: 0 60px;
+    margin-bottom: 30px;
+  }
+
+  &__imgInput {
+    display: none;
+  }
+
+  &__title {
+    color: #1c1c1c;
+    text-align: center;
+  }
 }
