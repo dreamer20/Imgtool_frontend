@@ -4,12 +4,14 @@ import Menu from './Menu';
 import MenuBar from './MenuBar';
 import MenuItem from './MenuItem';
 import ImagePreview from './ImagePreview';
+import Modal from './Modal';
 
 const api_url = 'http://localhost:5000/api/'
 
 function App() {
 
   const [openedImgSrc, setOpenedImgSrc] = useState(null);
+  const [openedModal, setOpenedModal] = useState(null);
   const [resultImgSrc, setResultImgSrc] = useState(null);
   const imgInputFileEl = useRef(null);
 
@@ -72,7 +74,13 @@ function App() {
   function rotateImage(degree) {
     if (degree) {
       processImage('rotate', {degree: degree});
+    } else {
+      setOpenedModal('rotate');
     }
+  }
+
+  function closeModal() {
+    setOpenedModal(null)
   }
 
   return (
@@ -118,6 +126,8 @@ function App() {
         accept="image/*" 
         onChange={handleImgInputFileChange}
         className="App__imgInput" /> 
+      <Modal onClose={closeModal} isVisible={openedModal === 'rotate' ? true : false}>
+      </Modal>
     </div>
   );
 }
