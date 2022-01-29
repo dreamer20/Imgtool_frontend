@@ -79,6 +79,10 @@ function App() {
     }
   }
 
+  function applyFilter(filterName) {
+    processImage('filter', {filterName});
+  }
+
   function closeModal() {
     setOpenedModal(null)
   }
@@ -113,6 +117,26 @@ function App() {
             <MenuItem onClick={() => rotateImage('270')}>
               Повернуть на 270&#176;
             </MenuItem>            
+          </Menu>
+          <Menu title="Фильтры">
+            <MenuItem onClick={() => applyFilter('CONTOUR')}>
+              Контур
+            </MenuItem>                        
+            <MenuItem onClick={() => applyFilter('DETAIL')}>
+              Уточнение
+            </MenuItem>                        
+            <MenuItem onClick={() => applyFilter('EMBOSS')}>
+              Тиснение
+            </MenuItem>                        
+            <MenuItem onClick={() => applyFilter('EDGE_ENHANCE')}>
+              Уточнить край
+            </MenuItem>                        
+            <MenuItem onClick={() => applyFilter('SMOOTH')}>
+              Сгладить
+            </MenuItem>                        
+            <MenuItem onClick={() => applyFilter('FIND_EDGES')}>
+              Выделение краев
+            </MenuItem>                        
           </Menu>
         </MenuBar>
       </header>
