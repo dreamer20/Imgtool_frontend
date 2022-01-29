@@ -150,7 +150,10 @@ function App() {
         accept="image/*" 
         onChange={handleImgInputFileChange}
         className="App__imgInput" /> 
-      <Modal onClose={closeModal} isVisible={openedModal === 'rotate' ? true : false}>
+      <Modal
+        onClose={closeModal}
+        isVisible={openedModal === 'rotate' ? true : false}
+        title="Повернуть изображение">
       </Modal>
     </div>
   );
