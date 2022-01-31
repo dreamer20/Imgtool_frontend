@@ -1,3 +1,5 @@
+$primary-color: #0060df;
+
 .Modal {
   position: absolute;
   z-index: 99999;
@@ -64,16 +66,19 @@
     margin: 0 5px;
     border: 1px solid #111;
     background: #1a1a1a;
-    color: #bbb;
+    color: #c8c8c8;
     cursor: pointer;
     font-size: 16px;
     border-radius: 4px;
 
     &_apply {
-      background: #0b4477;
+      background: $primary-color;
 
       &:hover {
-        background: #0e5a9d !important;
+        background: #0048a8 !important;
+      }
+      &:active {
+        background: #00357b !important;
       }
     }
 

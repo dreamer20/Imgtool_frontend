@@ -5,6 +5,7 @@ import MenuBar from './MenuBar';
 import MenuItem from './MenuItem';
 import ImagePreview from './ImagePreview';
 import Modal from './Modal';
+import RotateForm from './RotateForm';
 
 const api_url = 'http://localhost:5000/api/'
 
@@ -141,6 +142,9 @@ function App() {
         </MenuBar>
       </header>
       <h2 className="App__title">Оригинал:</h2>
+      <button className="Button">
+        Click
+      </button>
       <ImagePreview onClick={openImage} src={openedImgSrc} image='original' />
       <h2 className="App__title">Результат:</h2>
       <ImagePreview image='result' src={resultImgSrc} />
@@ -150,11 +154,9 @@ function App() {
         accept="image/*" 
         onChange={handleImgInputFileChange}
         className="App__imgInput" /> 
-      <Modal
-        onClose={closeModal}
-        isVisible={openedModal === 'rotate' ? true : false}
-        title="Повернуть изображение">
-      </Modal>
+      <RotateForm 
+          onClose={closeModal}
+          isVisible={openedModal === 'rotate' ? true : false}/>
     </div>
   );
 }

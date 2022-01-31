@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
-import './Modal.scss'
+import Button from './Button';
+import './Modal.scss';
 
 function Modal(props) {
 
@@ -37,12 +37,12 @@ function Modal(props) {
           {props.children}
         </div>
         <div className="Modal__footer">
-          <button className="Modal__button Modal__button_apply" onClick={props.onApply}>
+          <Button onClick={props.onApply} primary="true">
             Применить
-          </button>
-          <button className="Modal__button" onClick={props.onClose}>
+          </Button>
+          <Button onClick={props.onClose}>
             Отмена
-          </button>
+          </Button>
         </div>
       </div>
     </div>
