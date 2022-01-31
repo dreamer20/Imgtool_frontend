@@ -3,19 +3,19 @@
 .Button {
   padding: 5px 15px;
   margin: 0 5px;
-  border: 1px solid #111;
-  background: #484848;
-  color: #c8c8c8;
+  border: 1px solid var.$button-border;
+  background: var.$button-default;
+  color: var.$button-text;
   cursor: pointer;
   font-size: 16px;
   border-radius: 4px;
 
   &:hover {
-    background: #2a2a2a;
+    background: var.$button-hover;
   }
 
   &:active {
-    background: #1a1a1a;
+    background: var.$button-active;
   }
 }
 
@@ -23,9 +23,9 @@
   background: var.$primary-color;
 
   &:hover {
-    background: #0048a8 !important;
+    background: var.$primary-hover !important;
   }
   &:active {
-    background: #00357b !important;
+    background: var.$primary-actve !important;
   }
 }
