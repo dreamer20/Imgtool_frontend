@@ -1,0 +1,31 @@
+@use 'src/variables' as var;
+
+.Button {
+  padding: 5px 15px;
+  margin: 0 5px;
+  border: 1px solid #111;
+  background: #484848;
+  color: #c8c8c8;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+
+  &:hover {
+    background: #2a2a2a;
+  }
+
+  &:active {
+    background: #1a1a1a;
+  }
+}
+
+.Button_primary {
+  background: var.$primary-color;
+
+  &:hover {
+    background: #0048a8 !important;
+  }
+  &:active {
+    background: #00357b !important;
+  }
+}
