@@ -48,14 +48,20 @@ function RotateForm(props) {
     }
 
     function rotateImage() {
-        props.onApply(degree);
-        props.onClose()
+        if (degree === 0) {
+            props.onClose();
+        } else {
+            props.onClose()
+            props.onApply(degree);            
+        }
     }
 
     return (
       <Modal
         onClose={props.onClose}
         isVisible={props.isVisible}
+        applyButtonText="Применить"
+        cancel="true"
         title="Повернуть изображение"
         onApply={rotateImage}>
         <div className="RotateForm">

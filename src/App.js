@@ -7,18 +7,19 @@ import ImagePreview from './ImagePreview';
 import Modal from './Modal';
 import RotateForm from './RotateForm';
 
-const api_url = 'http://localhost:5000/api/'
+const api_url = 'http://localhost:5000/api/';
 
 function App() {
 
   const [openedImgSrc, setOpenedImgSrc] = useState(null);
   const [openedModal, setOpenedModal] = useState(null);
   const [resultImgSrc, setResultImgSrc] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const imgInputFileEl = useRef(null);
 
   function processImage(tool_name, processOptions) {
     if (!imgInputFileEl.current.files[0]) {
-      alert('Файл не выбран');
+      showErrorMessage('Файл не выбран.');
       return;
     }
     const formData = new FormData();
@@ -39,7 +40,7 @@ function App() {
     fetch(api_url + tool_name, fetchOptions)
       .then((response) => {
         if (response.status === 400) {
-          response.json().then(data => alert(data.error));
+          response.json().then(data => showErrorMessage(data.error));
         } else if (response.status === 200) {
           response.blob().then(blob => {
           const src = URL.createObjectURL(blob);
@@ -82,6 +83,11 @@ function App() {
 
   function applyFilter(filterName) {
     processImage('filter', {filterName});
+  }
+
+  function showErrorMessage(message) {
+    setErrorMessage(message);
+    setOpenedModal('error');
   }
 
   function closeModal() {
@@ -155,6 +161,12 @@ function App() {
           onApply={rotateImage}
           onClose={closeModal}
           isVisible={openedModal === 'rotate' ? true : false}/>
+      <Modal
+        onClose={closeModal}
+        isVisible={openedModal === 'error' ? true : false}
+        onApply={closeModal}>
+        {errorMessage}
+      </Modal>
     </div>
   );
 }
