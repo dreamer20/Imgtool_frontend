@@ -1,0 +1,58 @@
+@use 'src/variables' as var;
+
+
+.RadioButton {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    flex: 0 1 auto;
+
+    &__input {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    &__text {
+        flex: 0 1 auto;
+        padding: 0 5px;
+    }
+
+    &__radio-circle_checked::after {
+        background: var.$primary-color;
+    }
+
+    &__radio-circle {
+        flex: 0 1 auto;
+        box-sizing: border-box;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #ddd;
+        border: 3px solid var.$primary-color;
+        position: relative;
+
+        &::after {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: block;
+            content: "";
+            position: absolute;
+            // background: #333;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        &:hover {
+            border: 3px solid var.$primary-hover;
+        }
+
+        &:active {
+            border: 3px solid var.$primary-active;
+        }
+    }
+
+}
