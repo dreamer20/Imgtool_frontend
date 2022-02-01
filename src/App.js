@@ -142,9 +142,6 @@ function App() {
         </MenuBar>
       </header>
       <h2 className="App__title">Оригинал:</h2>
-      <button className="Button">
-        Click
-      </button>
       <ImagePreview onClick={openImage} src={openedImgSrc} image='original' />
       <h2 className="App__title">Результат:</h2>
       <ImagePreview image='result' src={resultImgSrc} />
@@ -154,7 +151,8 @@ function App() {
         accept="image/*" 
         onChange={handleImgInputFileChange}
         className="App__imgInput" /> 
-      <RotateForm 
+      <RotateForm
+          onApply={rotateImage}
           onClose={closeModal}
           isVisible={openedModal === 'rotate' ? true : false}/>
     </div>

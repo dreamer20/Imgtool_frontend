@@ -1,0 +1,29 @@
+.RotateForm {
+    display: flex;
+    flex-flow: column nowrap;
+    color: #c8c8c8;
+
+    &__top {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    &__bottom {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    &__section {
+        margin-bottom: 5px;
+
+        &_half {
+            flex: 5 1 0;
+
+            display: flex;
+        }
+
+        &_half {
+            flex: 0 1 40px;
+        }
+    }
+}
