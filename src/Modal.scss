@@ -1,4 +1,4 @@
-$primary-color: #0060df;
+@use 'src/variables' as var;
 
 .Modal {
   position: absolute;
@@ -13,32 +13,23 @@ $primary-color: #0060df;
   justify-content: center;
 
   &__window {
-    color: #ddd;
+    color: var.$text-color;
     width: 500px;
-    background: #333;
+    background: var.$background-color;
     border-radius: 4px;
     display: flex;
     flex-flow: column wrap;
-    border: 1px solid #111;
+    border: 1px solid var.$border-color;
   }
 
   &__header {
-    border-bottom: 1px solid #111;
+    border-bottom: 1px solid var.$border-color;
     flex: 0 0 auto;
     padding: 10px 10px;
     display: flex;
     flex-flow: row nowrap;
-    color: #bbb;
+    color: var.$text-color;
     font-weight: 700;
-  }
-
-  &__footer {
-    flex: 0 0 auto;
-    padding: 10px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: end;
-
   }
 
   &__content {
@@ -51,39 +42,14 @@ $primary-color: #0060df;
   }
 
   &__close {
-    flex: 0 0 auto;
-    cursor: pointer;
-    padding: 0 5px;
-    font-size: 20px;
-    line-height: 1;
-    &:hover {
-      color: #f00;
-    }
+  flex: 0 0 auto;
+  cursor: pointer;
+  padding: 0 5px;
+  font-size: 20px;
+  line-height: 1;
+  
+  &:hover {
+    color: #f00;
   }
-
-  &__button {
-    padding: 5px 15px;
-    margin: 0 5px;
-    border: 1px solid #111;
-    background: #1a1a1a;
-    color: #c8c8c8;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-
-    &_apply {
-      background: $primary-color;
-
-      &:hover {
-        background: #0048a8 !important;
-      }
-      &:active {
-        background: #00357b !important;
-      }
-    }
-
-    &:hover {
-      background: #444;
-    }
-  }
+}
 }
