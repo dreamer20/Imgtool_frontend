@@ -1,6 +1,12 @@
+@use 'src/variables' as var;
+* {
+  box-sizing: border-box;
+}
 .App {
-  margin-bottom: 60px;
-
+  
+  background: var.$background-color;
+  color: var.$text-color;
+  padding: 50px;
   &__header {
     background: #1c1c1c;
     padding: 0 60px;

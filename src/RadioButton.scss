@@ -1,58 +1,50 @@
 @use 'src/variables' as var;
 
-
 .RadioButton {
-    display: flex;
+    display: inline-flex;
     flex-flow: row nowrap;
-    align-items: center;
-    flex: 0 1 auto;
+
+    &:hover &__view {
+        border-color: var.$primary-color;
+    }
+
+    &:active &__view {
+        border-color: var.$primary-color-active;
+    }
+
+    &__view {
+        width: 20px;
+        height: 20px;
+        border: 3px solid var.$default-color;
+        border-radius: 50%;
+        flex: 0 0 auto;
+        margin-right: 5px;
+        display: flex;
+        position: relative;
+
+        &::after {
+            box-sizing: border-box;
+            content: "";
+            border-radius: 50%;
+            border: 3px solid var.$background-color;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var.$primary-color;
+            transition: all .1s linear;
+            transform: scale(0);
+        }
+    }
 
     &__input {
         width: 100%;
         height: 100%;
         opacity: 0;
+        position: absolute;
     }
 
-    &__text {
-        flex: 0 1 auto;
-        padding: 0 5px;
+    &__checked &__view::after {
+        transform: scale(1);
+
     }
-
-    &__radio-circle_checked::after {
-        background: var.$primary-color;
-    }
-
-    &__radio-circle {
-        flex: 0 1 auto;
-        box-sizing: border-box;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: #ddd;
-        border: 3px solid var.$primary-color;
-        position: relative;
-
-        &::after {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: block;
-            content: "";
-            position: absolute;
-            // background: #333;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-        }
-
-        &:hover {
-            border: 3px solid var.$primary-hover;
-        }
-
-        &:active {
-            border: 3px solid var.$primary-active;
-        }
-    }
-
 }
