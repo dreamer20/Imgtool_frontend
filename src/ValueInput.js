@@ -18,11 +18,11 @@ function ValueInput(props) {
                 <button
                     // disabled
                     onClick={props.onValueUp}
-                    className="ValueInput__button ValueInput__button_up"></button>
+                    className="ValueInput__button ValueInput__button_up">&#65087;</button>
                 <button
                     // disabled
                     onClick={props.onValueDown}
-                    className="ValueInput__button ValueInput__button_down"></button>
+                    className="ValueInput__button ValueInput__button_down">&#65088;</button>
             </div>
         </div>
     );

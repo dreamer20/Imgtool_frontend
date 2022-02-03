@@ -1,4 +1,4 @@
-$primary-color: #0060df;
+@use 'src/variables' as var;
 
 .ValueInput {
     display: flex;
@@ -8,21 +8,21 @@ $primary-color: #0060df;
 
     &__unit {
         background: #fff;
-        border-top: 1px solid #000;
-        border-bottom: 1px solid #000;
+        border-top: 1px solid var.$border-color;
+        border-bottom: 1px solid var.$border-color;
         padding-right: 5px;
         padding-top: 5px;
         padding-bottom: 5px;
         font-size: 18px;
         font-weight: 700;
-        color: #fff;
-        background: #575757;
+        color: var.$text-color;
+        background: #9d9d9d;
     }
 
     &__input {
         flex: 1 0 50px;
         text-align: right;
-        border: 1px solid #000;
+        border: 1px solid var.$border-color;
         border-right: none;
         outline: none;
         padding-left: 5px;
@@ -30,8 +30,8 @@ $primary-color: #0060df;
         padding-bottom: 5px;
         font-size: 18px;
         font-weight: 700;
-        color: #fff;
-        background: #575757;
+        color: var.$text-color;
+        background: #9d9d9d;
     }
 
     &__buttons {
@@ -45,14 +45,16 @@ $primary-color: #0060df;
         flex: 1;
         width: 40px;
         border: 1px solid #000;
-        background: #1a1a1a;
+        background: var.$default-color;
+        font-weight: 700;
+        line-height: 0;
 
         &:hover {
-            background: #252525;
+            background: var.$button-hover;
         }
 
         &:active {
-            background: #333;
+            background: var.$button-active;
         }
 
         &_up {

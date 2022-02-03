@@ -2,12 +2,14 @@ import React, { useRef, useState } from 'react';
 import './App.scss';
 
 import Button from './Button';
+import RotateForm from './RotateForm';
 
 const api_url = 'http://localhost:5000/api/';
 
 function App() {
   const [degree, setDegree] = useState(0);
   const [checkedRadio, setCheckedRadio] = useState(0);
+  const [modal, setModal] = useState(0);
 
   function handleChange(value) {
     setDegree(value);
@@ -16,11 +18,9 @@ function App() {
 
   return (
     <div className="App">
-      <Button>
-        Ок
-      </Button>
-      <Button primary>
-        Применить
+      <RotateForm isVisible={modal === 1} onClose={() => setModal(0)}/>
+      <Button onClick={() => setModal(1)}>
+        Show MOdal
       </Button>
     </div>
   );

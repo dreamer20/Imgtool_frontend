@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import Modal from './Modal';
 import ValueInput from './ValueInput';
 import RadioButton from './RadioButton';
+import Button from './Button';
 import './RotateForm.scss';
+import './helpers.scss';
 
 
 function RotateForm(props) {
@@ -60,53 +62,47 @@ function RotateForm(props) {
       <Modal
         onClose={props.onClose}
         isVisible={props.isVisible}
-        applyButtonText="Применить"
-        cancel="true"
-        title="Повернуть изображение"
-        onApply={rotateImage}>
+        title="Повернуть изображение">
         <div className="RotateForm">
-            <div className="RotateForm__top">
-                <div className="RotateForm__section">
-                    <RadioButton 
-                        text="90&#176;" 
-                        name="degree" 
-                        value="90" 
-                        checked={checkedRadio === 0} 
-                        onChange={(e) => checkRadio(e ,0)}/>
-                </div>
-                <div className="RotateForm__section">
-                    <RadioButton 
-                        text="180&#176;" 
-                        name="degree" 
-                        value="180" 
-                        checked={checkedRadio === 1} 
-                        onChange={(e) => checkRadio(e ,1)}/>
-                </div>
-                <div className="RotateForm__section">
-                    <RadioButton 
-                        text="270&#176;" 
-                        name="degree" 
-                        value="270" 
-                        checked={checkedRadio === 2} 
-                        onChange={(e) => checkRadio(e ,2)}/>
+            <div className="mr-b-5">
+                <RadioButton
+                    name="degree"
+                    text="90&#176;"
+                    checked={checkedRadio === 90}
+                    onChange={() => setCheckedRadio(90)}/>
+            </div>
+            <div className="mr-b-5">
+                <RadioButton
+                    name="degree"
+                    text="180&#176;"
+                    checked={checkedRadio === 180}
+                    onChange={() => setCheckedRadio(180)}/>                
+            </div>
+            <div className="mr-b-5">
+                <RadioButton
+                    name="degree"
+                    text="270&#176;"
+                    checked={checkedRadio === 270}
+                    onChange={() => setCheckedRadio(270)}/>                
+            </div>
+            <div className="RotateForm__custom-input_wrapper">
+                <RadioButton
+                    name="degree"
+                    text="Другое"
+                    checked={checkedRadio === -1}
+                    onChange={() => setCheckedRadio(-1)}/>
+                <div className="mr-l-10">
+                    <ValueInput 
+                        unitSymbol="&#176;"/>
                 </div>
             </div>
-            <div className="RotateForm__bottom">
-                <div className="RotateForm__section_half">
-                    <RadioButton 
-                        text="Другое" 
-                        name="degree" 
-                        checked={checkedRadio === 3} 
-                        onChange={(e) => checkRadio(e, 3)}/>
-                </div>
-                <div className="RotateForm__section_half1">
-                <ValueInput
-                    value={degree}
-                    unitSymbol="&#176;"
-                    onChange={handleDegreeChange}
-                    onValueUp={setValueUp}
-                    onValueDown={setValueDown}/>
-                </div>                            
+            <div className="RotateForm__footer">
+                <Button primary="true" onClick={props.onClose}>
+                    Применить
+                </Button>
+                <Button onClick={props.onClose}>
+                    Close
+                </Button>
             </div>
         </div>
       </Modal>
