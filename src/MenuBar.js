@@ -25,14 +25,13 @@ function MenuBar(props) {
   });
 
   const menu = props.children.map((elem, index) => {
-    const MenuBarStyle = {background: index == openedMenuIndex ? '#222' : ''};
+    const openedClass = index === openedMenuIndex ? 'MenuBar__opened' : '';
     const MenuStyle = {display: index == openedMenuIndex ? 'initial' : 'none'};
 
     return (
       <li
-        style={MenuBarStyle}
         onClick={() => openMenu(index)}
-        className="MenuBar__item"
+        className={`MenuBar__item ${openedClass}`} 
         key={elem.props.title}>
         {elem.props.title}
         <ul style={MenuStyle} className="MenuBar__menu">

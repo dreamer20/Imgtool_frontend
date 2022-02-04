@@ -1,15 +1,17 @@
+@use 'src/variables' as var;
+
 .MenuItem {
-  color: #aaa;
+  color: var.$text-color;
   white-space: nowrap;
   list-style: none;
   cursor: default;
   padding: 5px 10px;
 
   &__border {
-    border-bottom: 1px solid #353535;
+    border-bottom: 1px solid var.$border-color;
   }
 
   &:hover {
-    background: #333;
+    background: var.$primary-color;
   }
 }
