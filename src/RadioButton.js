@@ -2,20 +2,21 @@ import React, { useRef, useState } from 'react';
 import './RadioButton.scss';
 
 function RadioButton (props) {
-    const activeClass = props.checked ? "RadioButton__radio-circle_checked" : ""
+
+    const checkedClass = props.checked ? 'RadioButton__checked' : "";
+
     return (
-        <label className="RadioButton">
-            <div className={`RadioButton__radio-circle ${activeClass}`}>
+        <label className={`RadioButton ${checkedClass}`}>
+            <div className="RadioButton__view">
                 <input
-                    {...props}
-                    className="RadioButton__input"
-                    type="radio"
                     name={props.name}
                     onChange={props.onChange}
-                    value={props.value} />
-                
+                    checked={props.checked}
+                    className="RadioButton__input"
+                    type="radio" />                
             </div>
-            <div className="RadioButton__text">
+            <div 
+                className="RadioButton__text">
                 {props.text}
             </div>
         </label>

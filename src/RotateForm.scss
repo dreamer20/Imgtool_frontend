@@ -1,29 +1,20 @@
 .RotateForm {
     display: flex;
     flex-flow: column nowrap;
-    color: #c8c8c8;
+    // align-items: flex-start;
 
-    &__top {
-        display: flex;
-        flex-flow: column nowrap;
-    }
-
-    &__bottom {
+    &__custom-input_wrapper {
         display: flex;
         flex-flow: row nowrap;
+        margin-bottom: 20px;
+        align-items: center;
     }
-
-    &__section {
-        margin-bottom: 5px;
-
-        &_half {
-            flex: 5 1 0;
-
-            display: flex;
-        }
-
-        &_half {
-            flex: 0 1 40px;
-        }
+    
+    &__footer {
+        // align-self: stretch;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+        flex: 0 0 auto;
     }
 }

@@ -74,6 +74,7 @@ function App() {
   }
 
   function rotateImage(degree) {
+    console.log(degree);
     if (degree) {
       processImage('rotate', {degree: degree});
     } else {

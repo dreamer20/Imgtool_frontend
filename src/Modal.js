@@ -25,9 +25,6 @@ function Modal(props) {
   });
 
   const style = {display: props.isVisible ? 'flex' : 'none'};
-  const cancelButton = (<Button onClick={props.onClose}>
-            Отмена
-          </Button>);
 
   return (
     <div className="Modal" style={style} onClick={handleClick}>
@@ -38,12 +35,6 @@ function Modal(props) {
         </div> 
         <div className="Modal__content">
           {props.children}
-        </div>
-        <div className="Modal__footer">
-          <Button onClick={props.onApply} primary="true">
-            {props.applyButtonText || "Ок"}
-          </Button>
-          {props.cancel ? cancelButton : ""}
         </div>
       </div>
     </div>
