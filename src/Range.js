@@ -3,8 +3,14 @@ import './Range.scss';
 
 function Range (props) {
     const divRef = useRef();
-    const [value, setValue] = useState(0);
+    const [rangeParams, setRangeParams] = useState({
+        scalePosition: props.defaultValue ? (100 / props.max) * props.defaultValue : 0,
+        value: props.defaultValue || 0
+    });
+    // const [value, setValue] = useState(props.defaultValue || 0);
+    // const [scaleValue, setScaleValue] = useState(props.defaultValue || 0);
     const [isDragged, setIsDragged] = useState(false);
+    const valuePart = props.max / 100;
 
     useEffect(() => {
         if (isDragged) {
@@ -18,25 +24,28 @@ function Range (props) {
         }        
     });
 
-    useEffect(() => props.onChange(value));
+    useEffect(() => props.onChange(rangeParams.value));
 
     function calculateValue(clientX) {
         const rect = divRef.current.getBoundingClientRect();
         const scaleWidth = rect.width;
         const part = Math.floor(scaleWidth) / 100;
         const current = clientX - rect.left;
-        const value = Math.floor(current / part);
+        const scalePosition = Math.floor(current / part);
 
-        if (value > 100) return 100;
-        if (value < 0) return 0;
+        if (scalePosition > 100) return 100;
+        if (scalePosition < 0) return 0;
 
-        return Math.floor(value);
+        return Math.floor(scalePosition);
     }
 
     function handleMouseDown(e) {
         setIsDragged(true);
-        const value = calculateValue(e.clientX);
-        setValue(value);
+        const scalePosition = calculateValue(e.clientX);
+        setRangeParams({
+            scalePosition: scalePosition,
+            value: scalePosition * valuePart
+        });
     }
 
     function mouseUp(e) {
@@ -44,25 +53,46 @@ function Range (props) {
     }
 
     function handleMouseMove(e) {
-        const value = calculateValue(e.clientX);
-        setValue(value);
+        const scalePosition = calculateValue(e.clientX);
+        setRangeParams({
+            scalePosition: scalePosition,
+            value: scalePosition * valuePart
+        });
     }
 
     function onValueDown() {
-        setValue(oldValue => {
-            if (oldValue <= 0) return 0;
-            return oldValue - 1;
+        setRangeParams(oldState => {
+            if (oldState.scalePosition <= 0) {
+                return {
+                    scalePosition: 0,
+                    value: 0
+                }
+            }
+
+            return {
+                scalePosition: oldState.scalePosition - 1,
+                value: (oldState.scalePosition - 1) * valuePart
+            };
         });
     }
 
     function onValueUp() {
-        setValue(oldValue => {
-            if (oldValue >= 100) return 100;
-            return oldValue + 1;
+        setRangeParams(oldState => {
+            if (oldState.scalePosition >= 100) {
+                return {
+                    scalePosition: 100,
+                    value: 100 * valuePart
+                }
+            }
+
+            return {
+                scalePosition: oldState.scalePosition + 1,
+                value: (oldState.scalePosition + 1) * valuePart
+            };
         });
     }
 
-    const style = {width: `${value}%`};
+    const style = {width: `${rangeParams.scalePosition}%`};
 
     return (
         <div className="Range">
@@ -71,7 +101,7 @@ function Range (props) {
             </button>
             <div ref={divRef} className="Range__scale" onMouseDown={handleMouseDown}>
                 <div className="Range__value">
-                    {value}
+                    {rangeParams.value}
                 </div>
                 <div className="Range__slider" style={style}>
                 </div>
