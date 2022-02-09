@@ -6,6 +6,7 @@ import MenuItem from './MenuItem';
 import ImagePreview from './ImagePreview';
 import Modal from './Modal';
 import RotateForm from './RotateForm';
+import SolarizeForm from './SolarizeForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -15,6 +16,7 @@ function App() {
   const [openedModal, setOpenedModal] = useState(null);
   const [resultImgSrc, setResultImgSrc] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [range, setRange] = useState(0);
   const imgInputFileEl = useRef(null);
 
   function processImage(tool_name, processOptions) {
@@ -82,6 +84,10 @@ function App() {
     }
   }
 
+  function solarizeImage(threshold) {
+    processImage('solarize', {threshold: threshold});
+  }
+
   function applyFilter(filterName) {
     processImage('filter', {filterName});
   }
@@ -93,6 +99,10 @@ function App() {
 
   function closeModal() {
     setOpenedModal(null)
+  }
+
+  function showModal(modalName) {
+    setOpenedModal('solarize');
   }
 
   return (
@@ -142,8 +152,11 @@ function App() {
             <MenuItem onClick={() => applyFilter('SMOOTH')}>
               Сгладить
             </MenuItem>                        
-            <MenuItem onClick={() => applyFilter('FIND_EDGES')}>
+            <MenuItem border onClick={() => applyFilter('FIND_EDGES')}>
               Выделение краев
+            </MenuItem>                        
+            <MenuItem onClick={() => showModal('solarize')}>
+              Соляризация
             </MenuItem>                        
           </Menu>
         </MenuBar>
@@ -162,6 +175,10 @@ function App() {
           onApply={rotateImage}
           onClose={closeModal}
           isVisible={openedModal === 'rotate' ? true : false}/>
+      <SolarizeForm
+          onApply={solarizeImage}
+          onClose={closeModal}
+          isVisible={openedModal === 'solarize' ? true : false}/>
       <Modal
         onClose={closeModal}
         isVisible={openedModal === 'error' ? true : false}
