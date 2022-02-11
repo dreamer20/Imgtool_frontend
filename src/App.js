@@ -7,6 +7,7 @@ import ImagePreview from './ImagePreview';
 import Modal from './Modal';
 import RotateForm from './RotateForm';
 import SolarizeForm from './SolarizeForm';
+import SharpnessForm from './SharpnessForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -88,6 +89,10 @@ function App() {
     processImage('solarize', {threshold: threshold});
   }
 
+  function enhanceImageSharpness(factor) {
+    processImage('sharpness', {factor: factor});
+  }
+
   function applyFilter(filterName) {
     processImage('filter', {filterName});
   }
@@ -102,7 +107,7 @@ function App() {
   }
 
   function showModal(modalName) {
-    setOpenedModal('solarize');
+    setOpenedModal(modalName);
   }
 
   return (
@@ -159,6 +164,11 @@ function App() {
               Соляризация
             </MenuItem>                        
           </Menu>
+          <Menu title="Усилить">
+            <MenuItem onClick={() => showModal('sharpness')}>
+              Резкость
+            </MenuItem>                                    
+          </Menu>
         </MenuBar>
       </header>
       <h2 className="App__title">Оригинал:</h2>
@@ -179,6 +189,10 @@ function App() {
           onApply={solarizeImage}
           onClose={closeModal}
           isVisible={openedModal === 'solarize' ? true : false}/>
+      <SharpnessForm
+          onApply={enhanceImageSharpness}
+          onClose={closeModal}
+          isVisible={openedModal === 'sharpness' ? true : false}/>
       <Modal
         onClose={closeModal}
         isVisible={openedModal === 'error' ? true : false}
