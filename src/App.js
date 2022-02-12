@@ -9,6 +9,7 @@ import RotateForm from './RotateForm';
 import SolarizeForm from './SolarizeForm';
 import EnhanceForm from './EnhanceForm';
 import BlurForm from './BlurForm';
+import UnsharpMaskForm from './UnsharpMaskForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -90,6 +91,14 @@ function App() {
     processImage('solarize', {threshold: threshold});
   }
 
+  function applyUnsharpMask(radius, percent, threshold) {
+    processImage('unsharp_mask', {
+      radius,
+      percent,
+      threshold
+    });
+  }
+
   function enhanceImage(property , factor) {
     processImage(property, {factor: factor});
   }
@@ -164,6 +173,9 @@ function App() {
             <MenuItem onClick={() => showModal('solarize')}>
               Соляризация
             </MenuItem>                        
+            <MenuItem onClick={() => showModal('unsharpMask')}>
+              Маска нерезкости
+            </MenuItem>                        
           </Menu>
           <Menu title="Усилить">
             <MenuItem onClick={() => showModal('sharpness')}>
@@ -207,6 +219,10 @@ function App() {
           onApply={solarizeImage}
           onClose={closeModal}
           isVisible={openedModal === 'solarize' ? true : false}/>
+      <UnsharpMaskForm
+          onApply={applyUnsharpMask}
+          onClose={closeModal}
+          isVisible={openedModal === 'unsharpMask'}/>
       <EnhanceForm
           title='Резкость'
           onApply={(factor) => enhanceImage('sharpness', factor)}
