@@ -7,7 +7,7 @@ import ImagePreview from './ImagePreview';
 import Modal from './Modal';
 import RotateForm from './RotateForm';
 import SolarizeForm from './SolarizeForm';
-import SharpnessForm from './SharpnessForm';
+import EnhanceForm from './EnhanceForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -89,8 +89,8 @@ function App() {
     processImage('solarize', {threshold: threshold});
   }
 
-  function enhanceImageSharpness(factor) {
-    processImage('sharpness', {factor: factor});
+  function enhanceImage(property , factor) {
+    processImage(property, {factor: factor});
   }
 
   function applyFilter(filterName) {
@@ -168,6 +168,15 @@ function App() {
             <MenuItem onClick={() => showModal('sharpness')}>
               Резкость
             </MenuItem>                                    
+            <MenuItem onClick={() => showModal('brightness')}>
+              Яркость
+            </MenuItem>                                    
+            <MenuItem onClick={() => showModal('contrast')}>
+              Контраст
+            </MenuItem>                                    
+            <MenuItem onClick={() => showModal('color')}>
+              Цвет
+            </MenuItem>                                    
           </Menu>
         </MenuBar>
       </header>
@@ -189,10 +198,26 @@ function App() {
           onApply={solarizeImage}
           onClose={closeModal}
           isVisible={openedModal === 'solarize' ? true : false}/>
-      <SharpnessForm
-          onApply={enhanceImageSharpness}
+      <EnhanceForm
+          title='Резкость'
+          onApply={(factor) => enhanceImage('sharpness', factor)}
           onClose={closeModal}
-          isVisible={openedModal === 'sharpness' ? true : false}/>
+          isVisible={openedModal === 'sharpness'}/>
+      <EnhanceForm
+          title='Яркость'
+          onApply={(factor) => enhanceImage('brightness', factor)}
+          onClose={closeModal}
+          isVisible={openedModal === 'brightness'}/>
+      <EnhanceForm
+          title='Контраст'
+          onApply={(factor) => enhanceImage('contrast', factor)}
+          onClose={closeModal}
+          isVisible={openedModal === 'contrast'}/>
+      <EnhanceForm
+          title='Цвет'
+          onApply={(factor) => enhanceImage('color', factor)}
+          onClose={closeModal}
+          isVisible={openedModal === 'color'}/>
       <Modal
         onClose={closeModal}
         isVisible={openedModal === 'error' ? true : false}
