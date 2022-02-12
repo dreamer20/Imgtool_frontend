@@ -8,6 +8,7 @@ import Modal from './Modal';
 import RotateForm from './RotateForm';
 import SolarizeForm from './SolarizeForm';
 import EnhanceForm from './EnhanceForm';
+import BlurForm from './BlurForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -178,6 +179,14 @@ function App() {
               Цвет
             </MenuItem>                                    
           </Menu>
+          <Menu title="Размытие">
+            <MenuItem onClick={() => showModal('blur')}>
+              Размытие
+            </MenuItem>                                    
+            <MenuItem onClick={() => showModal('gaussianBlur')}>
+              Размытие по Гауссу
+            </MenuItem>                                    
+          </Menu>
         </MenuBar>
       </header>
       <h2 className="App__title">Оригинал:</h2>
@@ -218,6 +227,16 @@ function App() {
           onApply={(factor) => enhanceImage('color', factor)}
           onClose={closeModal}
           isVisible={openedModal === 'color'}/>
+      <BlurForm
+          title='Размытие'
+          onApply={(radius) => processImage('box_blur', {radius})}
+          onClose={closeModal}
+          isVisible={openedModal === 'blur'}/>
+      <BlurForm
+          title='Размытие по Гауссу'
+          onApply={(radius) => processImage('gaussian_blur', {radius})}
+          onClose={closeModal}
+          isVisible={openedModal === 'gaussianBlur'}/>
       <Modal
         onClose={closeModal}
         isVisible={openedModal === 'error' ? true : false}
