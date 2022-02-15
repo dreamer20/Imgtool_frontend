@@ -22,7 +22,7 @@ function ImagePreview(props) {
   }
 
   if (props.src) {
-    previewInner = <img src={props.src} alt={props.image} className="ImagePreview__image" />;
+    previewInner = <img onLoad={props.onLoad} src={props.src} alt={props.image} className="ImagePreview__image" />;
   } else {
     previewInner = (
       <div className="ImagePreview__container">
