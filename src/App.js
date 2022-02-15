@@ -155,6 +155,9 @@ function App() {
             <MenuItem onClick={() => processImage('invert')}>
               Инвертировать
             </MenuItem>            
+            <MenuItem onClick={() => processImage('autocontrast')}>
+              Автоконтраст
+            </MenuItem>            
           </Menu>
           <Menu title="Отражение">
             <MenuItem onClick={() => reflectImage('horizontally')}>
