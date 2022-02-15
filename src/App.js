@@ -158,6 +158,12 @@ function App() {
             <MenuItem onClick={() => processImage('autocontrast')}>
               Автоконтраст
             </MenuItem>            
+            <MenuItem onClick={() => processImage('equalize')}>
+              Выравнивание гистограммы
+            </MenuItem>            
+            <MenuItem onClick={() => processImage('grayscale')}>
+              Градации серого
+            </MenuItem>            
           </Menu>
           <Menu title="Отражение">
             <MenuItem onClick={() => reflectImage('horizontally')}>
