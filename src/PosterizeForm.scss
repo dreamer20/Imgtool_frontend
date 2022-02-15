@@ -1,0 +1,29 @@
+.PosterizeForm {
+    display: flex;
+    flex-flow: column nowrap;
+    
+    &__body {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-bottom: 15px;
+    }
+
+    &__row {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    &__label {
+        padding-right: 10px;
+        flex: 1 0 0;
+    }
+
+    &__footer {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+        flex: 0 0 auto;
+    }
+}

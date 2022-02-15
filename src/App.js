@@ -11,6 +11,7 @@ import EnhanceForm from './EnhanceForm';
 import BlurForm from './BlurForm';
 import ResizeForm from './ResizeForm';
 import UnsharpMaskForm from './UnsharpMaskForm';
+import PosterizeForm from './PosterizeForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -151,6 +152,9 @@ function App() {
             <MenuItem onClick={() => showModal('resize')}>
               Изменить размер
             </MenuItem>            
+            <MenuItem onClick={() => processImage('invert')}>
+              Инвертировать
+            </MenuItem>            
           </Menu>
           <Menu title="Отражение">
             <MenuItem onClick={() => reflectImage('horizontally')}>
@@ -198,6 +202,9 @@ function App() {
             </MenuItem>                        
             <MenuItem onClick={() => showModal('unsharpMask')}>
               Маска нерезкости
+            </MenuItem>                        
+            <MenuItem onClick={() => showModal('posterize')}>
+              Постеризация
             </MenuItem>                        
           </Menu>
           <Menu title="Усилить">
@@ -281,6 +288,10 @@ function App() {
           onApply={(radius) => processImage('gaussian_blur', {radius})}
           onClose={closeModal}
           isVisible={openedModal === 'gaussianBlur'}/>
+      <PosterizeForm
+          onApply={(bits) => processImage('posterize', {bits})}
+          onClose={closeModal}
+          isVisible={openedModal === 'posterize'}/>
       {resizeForm}
       <Modal
         onClose={closeModal}
