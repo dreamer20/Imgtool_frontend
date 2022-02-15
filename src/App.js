@@ -12,6 +12,7 @@ import BlurForm from './BlurForm';
 import ResizeForm from './ResizeForm';
 import UnsharpMaskForm from './UnsharpMaskForm';
 import PosterizeForm from './PosterizeForm';
+import BorderForm from './BorderForm';
 
 const api_url = 'http://localhost:5000/api/';
 
@@ -151,6 +152,9 @@ function App() {
             </MenuItem>            
             <MenuItem onClick={() => showModal('resize')}>
               Изменить размер
+            </MenuItem>            
+            <MenuItem onClick={() => showModal('border')}>
+              Граница
             </MenuItem>            
             <MenuItem onClick={() => processImage('invert')}>
               Инвертировать
@@ -301,6 +305,10 @@ function App() {
           onApply={(bits) => processImage('posterize', {bits})}
           onClose={closeModal}
           isVisible={openedModal === 'posterize'}/>
+      <BorderForm
+          onApply={(border) => processImage('border', border)}
+          onClose={closeModal}
+          isVisible={openedModal === 'border'}/>
       {resizeForm}
       <Modal
         onClose={closeModal}
