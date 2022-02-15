@@ -1,0 +1,51 @@
+@use 'src/variables' as var;
+
+.Checkbox {
+    display: inline-flex;
+    flex-flow: row nowrap;
+
+    &:hover &__view {
+        border-color: var.$primary-color;
+    }
+
+    &:active &__view {
+        border-color: var.$primary-color-active;
+    }
+
+    &__text {
+        margin-right: 5px;
+    }
+
+    &__view {
+        width: 20px;
+        height: 20px;
+        border: 3px solid var.$default-color;
+        flex: 0 0 auto;
+        display: flex;
+        position: relative;
+
+        &::after {
+            box-sizing: border-box;
+            content: "";
+            border: 3px solid var.$background-color;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var.$primary-color;
+            transition: all .1s linear;
+            transform: scale(0);
+        }
+    }
+
+    &__input {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+    }
+
+    &__checked &__view::after {
+        transform: scale(1);
+
+    }
+}
