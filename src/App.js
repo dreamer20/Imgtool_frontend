@@ -9,6 +9,7 @@ import RotateForm from './RotateForm';
 import SolarizeForm from './SolarizeForm';
 import EnhanceForm from './EnhanceForm';
 import BlurForm from './BlurForm';
+import ResizeForm from './ResizeForm';
 import UnsharpMaskForm from './UnsharpMaskForm';
 
 const api_url = 'http://localhost:5000/api/';
@@ -19,6 +20,7 @@ function App() {
   const [openedModal, setOpenedModal] = useState(null);
   const [resultImgSrc, setResultImgSrc] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageParams, setImageParams] = useState({width: 1, height: 1});
   const [range, setRange] = useState(0);
   const imgInputFileEl = useRef(null);
 
@@ -67,6 +69,13 @@ function App() {
 
   function openImage() {
     imgInputFileEl.current.click();
+  }
+
+  function handleImageParams(e) {
+    setImageParams({
+      width: e.target.naturalWidth,
+      height: e.target.naturalHeight
+    });
   }
 
   function handleImgInputFileChange(e) {
@@ -120,13 +129,27 @@ function App() {
     setOpenedModal(modalName);
   }
 
+  let resizeForm = null;
+
+  if (openedModal === 'resize') {
+    resizeForm = <ResizeForm
+          height={imageParams.height}
+          width={imageParams.width}
+          onApply={(width, height) => processImage('resize', {width, height})}
+          onClose={closeModal}
+          isVisible={openedModal === 'resize'}/>
+  }
+
   return (
     <div className="App">
       <header className="App__header">
         <MenuBar>
           <Menu title="Изображение">
-            <MenuItem onClick={openImage}>
+            <MenuItem border onClick={openImage}>
               Открыть
+            </MenuItem>            
+            <MenuItem onClick={() => showModal('resize')}>
+              Изменить размер
             </MenuItem>            
           </Menu>
           <Menu title="Отражение">
@@ -202,7 +225,7 @@ function App() {
         </MenuBar>
       </header>
       <h2 className="App__title">Оригинал:</h2>
-      <ImagePreview onClick={openImage} src={openedImgSrc} image='original' />
+      <ImagePreview onLoad={handleImageParams} onClick={openImage} src={openedImgSrc} image='original' />
       <h2 className="App__title">Результат:</h2>
       <ImagePreview image='result' src={resultImgSrc} />
       <input
@@ -253,6 +276,12 @@ function App() {
           onApply={(radius) => processImage('gaussian_blur', {radius})}
           onClose={closeModal}
           isVisible={openedModal === 'gaussianBlur'}/>
+      <BlurForm
+          title='Размытие по Гауссу'
+          onApply={(radius) => processImage('gaussian_blur', {radius})}
+          onClose={closeModal}
+          isVisible={openedModal === 'gaussianBlur'}/>
+      {resizeForm}
       <Modal
         onClose={closeModal}
         isVisible={openedModal === 'error' ? true : false}
